@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 class AbrahamHistoriesController < ApplicationController
+  skip_before_filter :limit_agent_views
   skip_before_filter :verify_authenticity_token
-  
+  respond_to :html, :json
+
   def create
     @abraham_history = AbrahamHistory.new(abraham_history_params)
     @abraham_history.creator_id = current_user.id
